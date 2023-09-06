@@ -1,4 +1,4 @@
-# Implement PatternToNumber
+# BA1L  pridruzivanje broja patternu
 
 def SymbolToNumber(symbol):
     if symbol=="A":
@@ -10,14 +10,14 @@ def SymbolToNumber(symbol):
     elif symbol=="T":
         return 3;
 
-def PatternToNumber(dna):
-    if len(dna)==0:
+def PatternToNumber(pattern):
+    if len(pattern)==0:
         return 0
-    symbol=dna[-1] # zadnji simbol
-    prefix=dna[:-1] # prvi simbol
-    res=4*PatternToNumber(prefix) + SymbolToNumber(symbol)
-    return res
-    
+    symbol=pattern[-1] # zadnji simbol
+    prefix=pattern[:-1] # sve osim zadnjeg
+    return 4*PatternToNumber(prefix) + SymbolToNumber(symbol)  #postoje 4 k-1mear s istim prefiksom za svaki kmer
 
-dna=input("Unesi dna: ")
-print(PatternToNumber(dna))
+
+
+pattern=input("Unesi dpattern: ")
+print(PatternToNumber(pattern))
