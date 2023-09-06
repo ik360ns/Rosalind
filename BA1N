@@ -31,3 +31,6 @@ pattern=input("pattern: ")
 d=int(input("d: "))
 Neighbors(pattern,d)
 
+Neighborhood=Neighbors(pattern,d)
+for element in Neighborhood:
+  print(element)
