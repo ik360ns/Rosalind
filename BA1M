@@ -1,13 +1,32 @@
-# Implement NumberToPattern
+# BA1M  broju pridruzujemo pattern
 
-def NumberToPattern(number,k):
-  rez=""
-  D={0:"A",1:"C",2:"G",3:"T"}
-  for i in range(k):
-    rez+=str(D[number%4])
-    number=number//4
-  return rez
+def NumberToSymbol(index):
+  if index==0:
+    return "A"
+  if index==1:
+    return "C"
+  if index==2:
+    return "G"
+  if index==3:
+    return "T"
 
-number=int(input("Number: "))
+def Quotient(m,n):
+  return m//n
+
+def Remainder(m,n):
+  return m%n
+
+
+def NumberToPattern(index,k):
+  if k==1:
+    return NumberToSymbol(index)
+
+  prefix=Quotient(index,4)
+  r=Remainder(index,4)
+
+  return NumberToPattern(prefix,k-1)+NumberToSymbol(r)
+
+
+index=int(input("Index: "))
 k=int(input("k: "))
-print(NumberToPattern(number,k))
+print(NumberToPattern(index,k))
