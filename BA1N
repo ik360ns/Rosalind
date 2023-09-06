@@ -1,9 +1,7 @@
-# Generate the d-Neighborhood of a String
+#BA1N  vraća skup svih kmera duljine len(pattern) čija hamming distance od patterna nije veca od d
 
-from itertools import product
-
-def allKmers(k):
-    return [''.join(i) for i in product('ACGT', repeat = k)]
+def Suffix(Pattern):
+  return Pattern[1:len(Pattern)];  #sve osim prvog simbola
 
 def HammingDistance(text1,text2):
     count=0
@@ -12,16 +10,24 @@ def HammingDistance(text1,text2):
             count+=1
     return count
 
-def Metoda(text,d):
-    kmeri=allKmers(len(text))
-    lista=[]
-    for kmer in kmeri:
-        if HammingDistance(kmer,text)<=d:
-            if kmer not in lista:
-                lista.append(kmer)
-    for i in range(len(lista)):
-        print(lista[i])
+nucleotides=["A","C","G","T"];
 
-text=input("text: ")
+def Neighbors(Pattern, d):
+  if d == 0:
+    return {Pattern};
+  if len(Pattern)== 1:
+    return {"A", "C", "G", "T"};
+  Neighborhood=set();
+  SuffixNeighbors=Neighbors(Suffix(Pattern),d);
+  for Text in SuffixNeighbors:
+    if(HammingDistance(Suffix(Pattern),Text)<d):
+      for i in range(0,4):
+        Neighborhood.add(nucleotides[i]+Text);
+    else:
+      Neighborhood.add(Pattern[0]+Text);
+  return Neighborhood;
+
+pattern=input("pattern: ")
 d=int(input("d: "))
-Metoda(text,d)
+Neighbors(pattern,d)
+
