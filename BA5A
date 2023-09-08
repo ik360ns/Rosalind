@@ -4,7 +4,7 @@ def DPChangeMoney(money,coins):
     
     MinNumCoins=[0]
 
-    for m in range(1, money+1):
+    for m in range(0, money+1):
         MinNumCoins.append(float("inf"))
         for i in range(1,len(coins)):
             if(m>=coins[i]):
