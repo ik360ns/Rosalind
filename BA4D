@@ -1,25 +1,5 @@
 # Compute the Number of Peptides of Given Total Mass
-
-def Metoda(mass,masses,counter):
-
-    if (mass in counter):  
-        return counter[mass]
-
-    if mass < 0: 
-        return 0
-
-    if mass == 0:
-        return 1
-
-    counter[mass]=0
-    for mass_ in masses:
-        counter[mass]+=Metoda(mass-mass_,masses,counter)
-    
-    return counter[mass]
-
-
 def Get_amino_acid_mass():
-
     mass = {
         "G": 57,
         "A": 71,
@@ -44,10 +24,28 @@ def Get_amino_acid_mass():
     }
     return mass
 
+def Metoda(mass,masses,counter):
+
+    if (mass in counter):  
+        return counter[mass]
+
+    if mass < 0: 
+        return 0
+
+    if mass == 0:
+        return 1
+
+    counter[mass]=0
+    for mass_ in masses:
+        counter[mass]+=Metoda(mass-mass_,masses,counter)
+    
+    return counter[mass]
+
+
+
 def Res(mass):
     masses=set(Get_amino_acid_mass().values())
     counter={}
-
     return Metoda(mass,masses,counter)  
   
 print(Res(1398))
